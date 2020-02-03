@@ -11,6 +11,7 @@
 #include <linux/fs.h>
 #include <linux/atomic.h>
 #include <linux/page-flags.h>
+#include <linux/agni_meminfo.h>
 #include <asm/page.h>
 
 struct notifier_block;
@@ -362,7 +363,13 @@ extern void kswapd_stop(int nid);
 static inline int mem_cgroup_swappiness(struct mem_cgroup *memcg)
 {
 	/* root ? */
-	if (mem_cgroup_disabled() || !memcg->css.parent)
+	if (mem_cgroup_disabled() || !memcg->css.parent) {
+		if (low_batt_swap_stall || !triggerswapping) {
+			vm_swappiness = low_batt_swappiness;
+		} else {
+			vm_swappiness = agni_swappiness;
+		}
+
 		return vm_swappiness;
 
 	return memcg->swappiness;
@@ -371,6 +378,11 @@ static inline int mem_cgroup_swappiness(struct mem_cgroup *memcg)
 #else
 static inline int mem_cgroup_swappiness(struct mem_cgroup *mem)
 {
+	if (low_batt_swap_stall || !triggerswapping) {
+		vm_swappiness = low_batt_swappiness;
+	} else {
+		vm_swappiness = agni_swappiness;
+	}
 	return vm_swappiness;
 }
 #endif

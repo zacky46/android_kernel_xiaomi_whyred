@@ -13,6 +13,7 @@
 
 bool is_adrenokgsl_on(void);
 extern bool true_gpu;
+extern unsigned long adreno_load(void);
 
 #endif
 
