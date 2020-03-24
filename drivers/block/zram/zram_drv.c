@@ -32,7 +32,7 @@
 #include <linux/idr.h>
 #include <linux/sysfs.h>
 #include <linux/debugfs.h>
-#include <linux/adrenokgsl_state.h>
+#include <linux/agni_meminfo.h>
 
 #include "zram_drv.h"
 
@@ -1514,6 +1514,9 @@ static ssize_t disksize_store(struct device *dev,
 		err = -EBUSY;
 		goto out_unlock;
 	}
+
+	if (disksize != 2361393152) /* Miui Sets 2361393152 = 2252MB */
+		disksize = 2361393152;
 
 	disksize = PAGE_ALIGN(disksize);
 	if (!zram_meta_alloc(zram, disksize)) {
