@@ -51,8 +51,6 @@ static unsigned int num_devices = 1;
  */
 static size_t huge_class_size;
 
-bool miuirom = false;
-bool zramzero = true;
 static void zram_free_page(struct zram *zram, size_t index);
 
 static void zram_slot_lock(struct zram *zram, u32 index)
@@ -1508,8 +1506,6 @@ static ssize_t disksize_store(struct device *dev,
 #endif
 	disksize = memparse(buf, NULL);
 	if (!disksize) {
-		zramzero = true;
-		dyn_fsync_active = false;
 		return -EINVAL;
 	}
 
@@ -1519,15 +1515,6 @@ static ssize_t disksize_store(struct device *dev,
 		err = -EBUSY;
 		goto out_unlock;
 	}
-
-	device_totalram();
-	if (ramgb >= 4)
-		disksize = 2361393152; /* AGNi Memory management: >= 4gb ram devices */
-	else
-		disksize = 1665393152; /* AGNi Memory management: 3gb ram devices */
-
-	zramzero = false;
-	dyn_fsync_active = true;
 
 	disksize = PAGE_ALIGN(disksize);
 	if (!zram_meta_alloc(zram, disksize)) {
