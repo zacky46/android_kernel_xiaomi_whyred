@@ -23,8 +23,7 @@
 extern struct vendor_eeprom s_vendor_eeprom[CAMERA_VENDOR_EEPROM_COUNT_MAX];
 /* Logging macro */
 #undef CDBG
-#define CDBG(fmt, args...) pr_debug(fmt, ##args)
-#define LCT_CAMERA_DEBUG 0
+#define CDBG(fmt, args...)
 
 #define SENSOR_MAX_MOUNTANGLE (360)
 
