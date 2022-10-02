@@ -9,14 +9,11 @@ KERNEL_DIR=$PWD
 BUILD_START=$(date +"%s")
 
 # Name and version of kernel
-KERNEL_NAME="SuperRyzen-CAF"
+KERNEL_NAME="HyperRyzen-CAF"
 KERNEL_VERSION="v4"
 
 # Device name
-if [[ "$*" =~ "tulip" ]]; then
-    DEVICE="tulip"
-    export LOCALVERSION="_$KERNEL_VERSION"
-elif [[ "$*" =~ "whyred" ]]; then
+if [[ "$*" =~ "whyred" ]]; then
     DEVICE="whyred"
     export LOCALVERSION="_$KERNEL_VERSION"
 fi
