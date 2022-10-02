@@ -4,7 +4,7 @@
 
 # Clone kernel source
 if [[ "$*" =~ "stable" ]]; then
-    git clone --depth=1 https://github.com/TianWalkzzMiku/SRyzen-CAF.git -b caf kernel
+    git clone --depth=1 https://"${GH_TOKEN}":x-oauth-basic@github.com/TianWalkzzMiku/HRyzen-CAF.git -b caf kernel
     cd kernel || exit
 fi
 
@@ -17,10 +17,7 @@ elif [[ "$*" =~ "gcc" ]]; then
 fi
 
 # Clone anykernel3
-git clone --depth=1 https://github.com/TianWalkzzMiku/AnyKernel3.git -b lavender-dtb ak3-lavender
 git clone --depth=1 https://github.com/TianWalkzzMiku/AnyKernel3.git -b whyred-dtb ak3-whyred
-git clone --depth=1 https://github.com/TianWalkzzMiku/AnyKernel3.git -b tulip-dtb ak3-tulip
-git clone --depth=1 https://github.com/TianWalkzzMiku/AnyKernel3.git -b a26x-dtb ak3-a26x
 
 # Telegram setup
 push_message() {
@@ -35,7 +32,7 @@ push_message() {
 # Push message to telegram
 push_message "
 <b>======================================</b>
-<b>Start Building :</b> <code>SuperRyzen Kernel</code>
+<b>Start Building :</b> <code>HyperRyzen Kernel</code>
 <b>Linux Version :</b> <code>$(make kernelversion | cut -d " " -f5 | tr -d '\n')</code>
 <b>Source Branch :</b> <code>$(git rev-parse --abbrev-ref HEAD)</code>
 <b>======================================</b> "

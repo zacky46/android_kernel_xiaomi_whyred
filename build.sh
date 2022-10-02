@@ -13,13 +13,7 @@ KERNEL_NAME="SuperRyzen-CAF"
 KERNEL_VERSION="v4"
 
 # Device name
-if [[ "$*" =~ "a26x" ]]; then
-    DEVICE="a26x"
-    export LOCALVERSION="_$KERNEL_VERSION"
-elif [[ "$*" =~ "lavender" ]]; then
-    DEVICE="lavender"
-    export LOCALVERSION="_$KERNEL_VERSION"
-elif [[ "$*" =~ "tulip" ]]; then
+if [[ "$*" =~ "tulip" ]]; then
     DEVICE="tulip"
     export LOCALVERSION="_$KERNEL_VERSION"
 elif [[ "$*" =~ "whyred" ]]; then
@@ -32,15 +26,8 @@ if [[ "$*" =~ "newcam" ]]; then
     CONFIGVERSION="newcam"
 elif [[ "$*" =~ "oldcam" ]]; then
     CONFIGVERSION="oldcam"
-elif [[ "$*" =~ "tencam" ]]; then
-    CONFIGVERSION="tencam"
 elif [[ "$*" =~ "qtihaptics" ]]; then
     CONFIGVERSION="qtihaptics"
-fi
-
-# Export localversion for OC variant
-if [[ "$*" =~ "oc" ]]; then
-    export LOCALVERSION="_$KERNEL_VERSION-OC"
 fi
 
 # Setup environtment
