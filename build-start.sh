@@ -4,7 +4,7 @@
 
 # Clone kernel source
 if [[ "$*" =~ "stable" ]]; then
-    git clone --depth=1 https://"${GH_TOKEN}":x-oauth-basic@github.com/TianWalkzzMiku/HRyzen-CAF.git -b caf kernel
+    git clone --depth=1 https://github.com/TianWalkzzMiku/HRyzen-CAF.git -b caf kernel
     cd kernel || exit
 fi
 
