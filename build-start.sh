@@ -18,6 +18,7 @@ fi
 
 # Clone anykernel3
 git clone --depth=1 https://github.com/TianWalkzzMiku/AnyKernel3.git -b whyred-dtb ak3-whyred
+git clone --depth=1 https://github.com/TianWalkzzMiku/AnyKernel3.git -b lavender-dtb ak3-lavender
 
 # Telegram setup
 push_message() {

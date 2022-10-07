@@ -16,6 +16,9 @@ KERNEL_VERSION="v4"
 if [[ "$*" =~ "whyred" ]]; then
     DEVICE="whyred"
     export LOCALVERSION="_$KERNEL_VERSION"
+elif [[ "$*" =~ "lavender" ]]; then
+    DEVICE="lavender"
+    export LOCALVERSION="_$KERNEL_VERSION"
 fi
 
 # Blob version

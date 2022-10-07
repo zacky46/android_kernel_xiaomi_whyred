@@ -8,6 +8,8 @@ KERNEL_DIR=$PWD
 # Device name
 if [[ "$*" =~ "whyred" ]]; then
     DEVICE="whyred"
+elif [[ "$*" =~ "whyred" ]]; then
+    DEVICE="whyred"
 fi
 
 # Setup environtment
