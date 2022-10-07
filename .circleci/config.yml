@@ -7,16 +7,16 @@ jobs:
       - run:
           name: Building HyperRyzen Kernel
           command: |
-            wget https://raw.githubusercontent.com/TianWalkzzMiku/HRyzen-CAF/caf/build-start.sh
+            curl -u <TianWalkzzMiku>:<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> https://raw.githubusercontent.com/TianWalkzzMiku/HRyzen-CAF/caf/build-start.sh
             bash build-start.sh stable clang
             cd kernel
-            wget https://raw.githubusercontent.com/TianWalkzzMiku/HRyzen-CAF/caf/build-dtb.sh
+            curl -u <TianWalkzzMiku>:<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> https://raw.githubusercontent.com/TianWalkzzMiku/HRyzen-CAF/caf/build-dtb.sh
             bash build-dtb.sh whyred clang qpnp
             git apply qti.patch
             bash build-dtb.sh whyred clang qti
             git restore .
-            wget https://raw.githubusercontent.com/TianWalkzzMiku/HRyzen-CAF/caf/build.sh
+            curl -u <TianWalkzzMiku>:<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> https://raw.githubusercontent.com/TianWalkzzMiku/HRyzen-CAF/caf/build.sh
             bash build.sh whyred newcam clang
             bash build.sh whyred oldcam clang
-            wget https://raw.githubusercontent.com/TianWalkzzMiku/HRyzen-CAF/caf/build-final.sh
+            curl -u <TianWalkzzMiku>:<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> https://raw.githubusercontent.com/TianWalkzzMiku/HRyzen-CAF/caf/build-final.sh
             bash build-final.sh clang
