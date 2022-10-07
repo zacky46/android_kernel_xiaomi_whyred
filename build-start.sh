@@ -2,12 +2,6 @@
 # Copyright (C) 2020-2022 Oktapra Amtono <oktapra.amtono@gmail.com>
 # Docker Kernel Build Script
 
-# Clone kernel source
-if [[ "$*" =~ "stable" ]]; then
-    git clone --depth=1 https://github.com/TianWalkzzMiku/HRyzen-CAF.git -b caf kernel
-    cd kernel || exit
-fi
-
 # Clone toolchain
 if [[ "$*" =~ "clang" ]]; then
     git clone --depth=1 https://gitlab.com/Panchajanya1999/azure-clang clang
