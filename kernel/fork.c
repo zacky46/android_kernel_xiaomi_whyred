@@ -1805,9 +1805,6 @@ long _do_fork(unsigned long clone_flags,
 	    cpu_input_boost_kick_max(25);
 	    devfreq_boost_kick_max(DEVFREQ_MSM_CPUBW, 75);
 		devfreq_boost_kick_max(DEVFREQ_MSM_GPUBW, 75);
-	  } else if (task_is_zygote(current) && (kp_active_mode() == 1)) {
-		   /* Nothing LOL */
-           pr_info("Battery Profiles Activated! Skipping CPU & DDR bus boosts\n");
 	  }
 	}
 
