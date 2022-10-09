@@ -1806,7 +1806,6 @@ long _do_fork(unsigned long clone_flags,
 	    devfreq_boost_kick_max(DEVFREQ_MSM_CPUBW, 75);
 		devfreq_boost_kick_max(DEVFREQ_MSM_GPUBW, 75);
 	  }
-	}
 
 	/*
 	 * Determine whether and which event to report to ptracer.  When

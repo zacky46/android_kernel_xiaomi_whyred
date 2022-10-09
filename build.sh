@@ -111,7 +111,7 @@ cp -r "$KERNEL_IMG" "$AK3_DIR"/kernel/
 cd "$AK3_DIR" || exit
 zip -r9 "$ZIP_NAME" ./*
 cd "$KERNEL_DIR" || exit
-cp "$AK3_DIR"/*.zip kernel-done/
+cp "$AK3_DIR"/*.zip kernel/
 
 # End count and calculate total build time
 BUILD_END=$(date +"%s")
