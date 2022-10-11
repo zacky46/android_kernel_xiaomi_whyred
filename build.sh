@@ -10,7 +10,7 @@ BUILD_START=$(date +"%s")
 
 # Name and version of kernel
 KERNEL_NAME="HyperRyzen-CAF"
-KERNEL_VERSION="v4"
+KERNEL_VERSION="v5"
 
 # Device name
 if [[ "$*" =~ "whyred" ]]; then
