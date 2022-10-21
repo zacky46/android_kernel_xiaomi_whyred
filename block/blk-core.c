@@ -294,7 +294,6 @@ EXPORT_SYMBOL(blk_stop_queue);
 void blk_sync_queue(struct request_queue *q)
 {
 	del_timer_sync(&q->timeout);
-	cancel_work_sync(&q->timeout_work);
 
 	if (q->mq_ops) {
 		struct blk_mq_hw_ctx *hctx;
@@ -689,13 +688,6 @@ static void blk_queue_usage_counter_release(struct percpu_ref *ref)
 	wake_up_all(&q->mq_freeze_wq);
 }
 
-static void blk_rq_timed_out_timer(unsigned long data)
-{
-	struct request_queue *q = (struct request_queue *)data;
-
-	kblockd_schedule_work(&q->timeout_work);
-}
-
 struct request_queue *blk_alloc_queue_node(gfp_t gfp_mask, int node_id)
 {
 	struct request_queue *q;
@@ -726,7 +718,6 @@ struct request_queue *blk_alloc_queue_node(gfp_t gfp_mask, int node_id)
 	setup_timer(&q->backing_dev_info->laptop_mode_wb_timer,
 		    laptop_mode_timer_fn, (unsigned long) q);
 	setup_timer(&q->timeout, blk_rq_timed_out_timer, (unsigned long) q);
-	INIT_WORK(&q->timeout_work, NULL);
 	INIT_LIST_HEAD(&q->queue_head);
 	INIT_LIST_HEAD(&q->timeout_list);
 	INIT_LIST_HEAD(&q->icq_list);
@@ -857,7 +848,6 @@ blk_init_allocated_queue(struct request_queue *q, request_fn_proc *rfn,
 	if (blk_init_rl(&q->root_rl, q, GFP_KERNEL))
 		goto fail;
 
-	INIT_WORK(&q->timeout_work, blk_timeout_work);
 	q->request_fn		= rfn;
 	q->prep_rq_fn		= NULL;
 	q->unprep_rq_fn		= NULL;
@@ -1273,11 +1263,7 @@ retry:
 	trace_block_sleeprq(q, bio, rw_flags & 1);
 
 	spin_unlock_irq(q->queue_lock);
-	/*
-	 * FIXME: this should be io_schedule().  The timeout is there as a
-	 * workaround for some io timeout problems.
-	 */
-	io_schedule_timeout(5*HZ);
+	io_schedule();
 
 	/*
 	 * After sleeping, we become a "batching" process and will be able
@@ -1364,7 +1350,7 @@ struct request *blk_make_request(struct request_queue *q, struct bio *bio,
 		int ret;
 
 		blk_queue_bounce(q, &bounce_bio);
-		ret = blk_rq_append_bio(rq, bounce_bio);
+		ret = blk_rq_append_bio(q, rq, bounce_bio);
 		if (unlikely(ret)) {
 			blk_put_request(rq);
 			return ERR_PTR(ret);
