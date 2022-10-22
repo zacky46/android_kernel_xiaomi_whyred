@@ -885,7 +885,7 @@ static int fg_get_msoc(struct fg_chip *chip, int *msoc)
 		low_batt_swap_stall = true;
 	else
 		low_batt_swap_stall = false;
-#endif
+
 	agni_memprobe();
 
 	return 0;
