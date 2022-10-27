@@ -1096,9 +1096,6 @@ static int cluster_configure(struct lpm_cluster *cluster, int idx,
 	}
 
 	if (idx != cluster->default_level) {
-		update_debug_pc_event(CLUSTER_ENTER, idx,
-			cluster->num_children_in_sync.bits[0],
-			cluster->child_cpus.bits[0], from_idle);
 //		trace_cluster_enter(cluster->cluster_name, idx,
 //			cluster->num_children_in_sync.bits[0],
 //			cluster->child_cpus.bits[0], from_idle);
@@ -1303,9 +1300,6 @@ static void cluster_unprepare(struct lpm_cluster *cluster,
 			suspend_wake_time = 0;
 	}
 
-	update_debug_pc_event(CLUSTER_EXIT, cluster->last_level,
-			cluster->num_children_in_sync.bits[0],
-			cluster->child_cpus.bits[0], from_idle);
 //	trace_cluster_exit(cluster->cluster_name, cluster->last_level,
 //			cluster->num_children_in_sync.bits[0],
 //			cluster->child_cpus.bits[0], from_idle);
@@ -1970,8 +1964,6 @@ enum msm_pm_l2_scm_flag lpm_cpu_pre_pc_cb(unsigned int cpu)
 	 * It must be acquired before releasing the cluster lock.
 	 */
 unlock_and_return:
-	update_debug_pc_event(PRE_PC_CB, retflag, 0xdeadbeef, 0xdeadbeef,
-			0xdeadbeef);
 //	trace_pre_pc_cb(retflag);
 	remote_spin_lock_rlock_id(&scm_handoff_lock,
 				  REMOTE_SPINLOCK_TID_START + cpu);
