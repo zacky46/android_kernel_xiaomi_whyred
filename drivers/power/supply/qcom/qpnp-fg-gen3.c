@@ -883,11 +883,7 @@ static int fg_get_msoc(struct fg_chip *chip, int *msoc)
 		low_batt_swap_stall = true;
 	else
 		low_batt_swap_stall = false;
-
-	if (charging_prev_state != is_charging) {
-		charging_prev_state = is_charging;
-		mm_drop_caches(3); /* drop caches on charger connect/disconnect */
-	}
+	
 	agni_memprobe();
 
 	return 0;
