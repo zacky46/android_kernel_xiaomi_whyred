@@ -411,7 +411,6 @@ module_param_named(
 );
 
 bool is_charging = false;
-static bool charging_prev_state = false;
 
 bool charging_detected(void)
 {
