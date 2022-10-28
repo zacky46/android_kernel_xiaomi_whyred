@@ -849,9 +849,6 @@ static int fg_get_msoc_raw(struct fg_chip *chip, int *val)
 #define HIGH_CAPACITY	80
 #define LOW_CAPACITY	15
 #define FULL_SOC_RAW	255
-#if defined(CONFIG_KERNEL_XIAOMI_A26X) || defined(CONFIG_KERNEL_XIAOMI_LAVENDER)
-#define FULL_SOC_REPORT_THR 250
-#endif
 bool low_batt_swap_stall = false;
 bool batt_swap_push = false;
 
