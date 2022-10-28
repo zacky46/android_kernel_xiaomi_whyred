@@ -9,8 +9,8 @@ KERNEL_DIR=$PWD
 BUILD_START=$(date +"%s")
 
 # Name and version of kernel
-KERNEL_NAME="HyperRyzen-CAF"
-KERNEL_VERSION="v6"
+KERNEL_NAME="HyperRyzen-OSS-v7"
+KERNEL_VERSION="v7"
 
 # Device name
 if [[ "$*" =~ "whyred" ]]; then
