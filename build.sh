@@ -9,7 +9,7 @@ KERNEL_DIR=$PWD
 BUILD_START=$(date +"%s")
 
 # Name and version of kernel
-KERNEL_NAME="HyperRyzen-OSS-v7"
+KERNEL_NAME="HyperRyzen-OSS"
 KERNEL_VERSION="v7"
 
 # Device name
