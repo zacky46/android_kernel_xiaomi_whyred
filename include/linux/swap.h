@@ -367,6 +367,7 @@ static inline int mem_cgroup_swappiness(struct mem_cgroup *memcg)
 		vm_swappiness = agni_swappiness;
 
 		return vm_swappiness;
+	}
 
 	return memcg->swappiness;
 }
