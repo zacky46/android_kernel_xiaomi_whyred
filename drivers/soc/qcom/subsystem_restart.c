@@ -1137,7 +1137,7 @@ int subsystem_restart_dev(struct subsys_device *dev)
 		panic("subsys-restart: Unknown restart level!\n");
 
 		break;
-
+	}
 	module_put(dev->owner);
 	put_device(&dev->dev);
 
