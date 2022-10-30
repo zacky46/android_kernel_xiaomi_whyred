@@ -1586,22 +1586,9 @@ struct ion_handle *ion_import_dma_buf(struct ion_client *client, int fd)
 }
 EXPORT_SYMBOL(ion_import_dma_buf);
 
-	read_lock(&client->rb_lock);
-	while (*p) {
-		entry = rb_entry(*p, typeof(*entry), rnode);
-		if (buffer < entry->buffer) {
-			p = &(*p)->rb_left;
-		} else if (buffer > entry->buffer) {
-			p = &(*p)->rb_right;
-		} else {
-			atomic_inc(&entry->refcount);
-			read_unlock(&client->rb_lock);
-			return entry;
-		}
-	}
-	buffer = container_of(dmabuf->priv, typeof(*buffer), iommu_data);
-
-	return ERR_PTR(-EINVAL);
+struct ion_handle *ion_import_dma_buf_nolock(struct ion_client *client, int fd)
+{
+	return __ion_import_dma_buf(client, fd, false);
 }
 
 static int ion_sync_for_device(struct ion_client *client, int fd)
