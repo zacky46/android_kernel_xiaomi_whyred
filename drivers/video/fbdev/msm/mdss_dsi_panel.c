@@ -29,6 +29,7 @@
 #include "mdss_dba_utils.h"
 #include "mdss_debug.h"
 #include "mdss_livedisplay.h"
+#include <linux/agni_meminfo.h>
 
 #ifdef CONFIG_POWERSUSPEND
 #include <linux/powersuspend.h>
