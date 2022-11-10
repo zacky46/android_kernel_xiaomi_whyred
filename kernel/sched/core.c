@@ -2951,7 +2951,14 @@ u64 nr_running_integral(unsigned int cpu)
 }
 #endif
 
-#ifdef CONFIG_SMP
+void get_iowait_load(unsigned long *nr_waiters, unsigned long *load)
+{
+	struct rq *rq = this_rq();
+	*nr_waiters = atomic_read(&rq->nr_iowait);
+	*load = rq->load.weight;
+}
+
+#if defined(CONFIG_SMP)
 
 /*
  * sched_exec - execve() is a valuable balancing opportunity, because at
