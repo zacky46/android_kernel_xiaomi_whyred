@@ -10,7 +10,7 @@ BUILD_START=$(date +"%s")
 
 # Name and version of kernel
 KERNEL_NAME="HyperRyzen-OSS"
-KERNEL_VERSION="v8"
+KERNEL_VERSION="v9"
 
 # Device name
 if [[ "$*" =~ "whyred" ]]; then
